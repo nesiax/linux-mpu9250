@@ -36,7 +36,7 @@
 int set_cal(int mag, char *cal_file);
 void read_loop(unsigned int sample_rate);
 void print_fused_euler_angles(mpudata_t *mpu);
-void print_fused_quaternion(mpudata_t *mpu);
+void print_fused_quaternions(mpudata_t *mpu);
 void print_calibrated_accel(mpudata_t *mpu);
 void print_calibrated_mag(mpudata_t *mpu);
 void register_sig_handler();
