@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////
 //
-//  This file is part of linux-mpu9150
+//  This file is part of linux-mpu9250
 //
 //  Copyright (c) 2013 Pansenti, LLC
 //
@@ -27,7 +27,7 @@
 #include "linux_glue.h"
 #include "inv_mpu.h"
 #include "inv_mpu_dmp_motion_driver.h"
-#include "mpu9150.h"
+#include "mpu9250.h"
 
 static int data_ready();
 static void calibrate_data(mpudata_t *mpu);
@@ -45,12 +45,12 @@ caldata_t accel_cal_data;
 int use_mag_cal;
 caldata_t mag_cal_data;
 
-void mpu9150_set_debug(int on)
+void mpu9250_set_debug(int on)
 {
 	debug_on = on;
 }
 
-int mpu9150_init(int i2c_bus, int sample_rate, int mix_factor)
+int mpu9250_init(int i2c_bus, int sample_rate, int mix_factor)
 {
 	signed char gyro_orientation[9] = { 1, 0, 0,
                                         0, 1, 0,
@@ -161,7 +161,7 @@ int mpu9150_init(int i2c_bus, int sample_rate, int mix_factor)
 	return 0;
 }
 
-void mpu9150_exit()
+void mpu9250_exit()
 {
 	// turn off the DMP on exit 
 	if (mpu_set_dmp_state(0))
@@ -170,7 +170,7 @@ void mpu9150_exit()
 	// TODO: Should turn off the sensors too
 }
 
-void mpu9150_set_accel_cal(caldata_t *cal)
+void mpu9250_set_accel_cal(caldata_t *cal)
 {
 	int i;
 	long bias[3];
@@ -198,12 +198,12 @@ void mpu9150_set_accel_cal(caldata_t *cal)
 			printf("%d : %d\n", accel_cal_data.range[i], accel_cal_data.offset[i]);
 	}
 
-	mpu_set_accel_bias(bias);
+	mpu_set_accel_bias_6500_reg(bias);
 
 	use_accel_cal = 1;
 }
 
-void mpu9150_set_mag_cal(caldata_t *cal)
+void mpu9250_set_mag_cal(caldata_t *cal)
 {
 	int i;
 
@@ -236,7 +236,7 @@ void mpu9150_set_mag_cal(caldata_t *cal)
 	use_mag_cal = 1;
 }
 
-int mpu9150_read_dmp(mpudata_t *mpu)
+int mpu9250_read_dmp(mpudata_t *mpu)
 {
 	short sensors;
 	unsigned char more;
@@ -260,7 +260,7 @@ int mpu9150_read_dmp(mpudata_t *mpu)
 	return 0;
 }
 
-int mpu9150_read_mag(mpudata_t *mpu)
+int mpu9250_read_mag(mpudata_t *mpu)
 {
 	if (mpu_get_compass_reg(mpu->rawMag, &mpu->magTimestamp) < 0) {
 		printf("mpu_get_compass_reg() failed\n");
@@ -270,12 +270,12 @@ int mpu9150_read_mag(mpudata_t *mpu)
 	return 0;
 }
 
-int mpu9150_read(mpudata_t *mpu)
+int mpu9250_read(mpudata_t *mpu)
 {
-	if (mpu9150_read_dmp(mpu) != 0)
+	if (mpu9250_read_dmp(mpu) != 0)
 		return -1;
 
-	if (mpu9150_read_mag(mpu) != 0)
+	if (mpu9250_read_mag(mpu) != 0)
 		return -1;
 
 	calibrate_data(mpu);
@@ -465,3 +465,8 @@ unsigned short inv_orientation_matrix_to_scalar(const signed char *mtx)
     return scalar;
 }
 
+
+/* Local Variables:  */
+/* mode: c           */
+/* c-basic-offset: 4 */
+/* End:              */

@@ -3,3 +3,6 @@ Makefile
 *.o
 imucal
 *~
+
+accelcal.txt
+magcal.txt

@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////
 //
-//  This file is part of linux-mpu9150
+//  This file is part of linux-mpu9250
 //
 //  Copyright (c) 2013 Pansenti, LLC
 //
@@ -29,7 +29,7 @@
 #include <getopt.h>
 #include <errno.h>
 
-#include "mpu9150.h"
+#include "mpu9250.h"
 #include "linux_glue.h"
 #include "local_defaults.h"
 
@@ -148,9 +148,9 @@ int main(int argc, char **argv)
 
 	register_sig_handler();
 
-	mpu9150_set_debug(verbose);
+	mpu9250_set_debug(verbose);
 
-	if (mpu9150_init(i2c_bus, sample_rate, yaw_mix_factor))
+	if (mpu9250_init(i2c_bus, sample_rate, yaw_mix_factor))
 		exit(1);
 
 	set_cal(0, accel_cal_file);
@@ -164,7 +164,7 @@ int main(int argc, char **argv)
 
 	read_loop(sample_rate);
 
-	mpu9150_exit();
+	mpu9250_exit();
 
 	return 0;
 }
@@ -186,7 +186,7 @@ void read_loop(unsigned int sample_rate)
 	linux_delay_ms(loop_delay);
 
 	while (!done) {
-		if (mpu9150_read(&mpu) == 0) {
+		if (mpu9250_read(&mpu) == 0) {
 			print_fused_euler_angles(&mpu);
 			// printf_fused_quaternions(&mpu);
 			// print_calibrated_accel(&mpu);
@@ -305,9 +305,9 @@ int set_cal(int mag, char *cal_file)
 	cal.range[2] = (short)(val[5] - cal.offset[2]);
 	
 	if (mag) 
-		mpu9150_set_mag_cal(&cal);
+		mpu9250_set_mag_cal(&cal);
 	else 
-		mpu9150_set_accel_cal(&cal);
+		mpu9250_set_accel_cal(&cal);
 
 	return 0;
 }
@@ -329,3 +329,8 @@ void sigint_handler(int sig)
 {
 	done = 1;
 }
+
+/* Local Variables:  */
+/* mode: c           */
+/* c-basic-offset: 4 */
+/* End:              */

@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////
 //
-//  This file is part of linux-mpu9150
+//  This file is part of linux-mpu9250
 //
 //  Copyright (c) 2013 Pansenti, LLC
 //
@@ -45,3 +45,8 @@
 
 #endif /* LOCAL_DEFAULTS_H */
 
+
+/* Local Variables:  */
+/* mode: c           */
+/* c-basic-offset: 4 */
+/* End:              */

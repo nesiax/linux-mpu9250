@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////
 //
-//  This file is part of linux-mpu9150
+//  This file is part of linux-mpu9250
 //
 //  Copyright (c) 2013 Pansenti, LLC
 //
@@ -109,3 +109,8 @@ void quaternionMultiply(quaternion_t qa, quaternion_t qb, quaternion_t qd)
 	qd[QUAT_Z] = qa[QUAT_W] * vb[VEC3_Z] + qb[QUAT_W] * va[VEC3_Z] + crossAB[VEC3_Z];
 }
 
+
+/* Local Variables:  */
+/* mode: c           */
+/* c-basic-offset: 4 */
+/* End:              */

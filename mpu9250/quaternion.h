@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////
 //
-//  This file is part of linux-mpu9150
+//  This file is part of linux-mpu9250
 //
 //  Copyright (c) 2013 Pansenti, LLC
 //
@@ -21,17 +21,29 @@
 //  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
 //  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+#ifndef MPUQUATERNION_H
+#define MPUQUATERNION_H
+
 #include "vector3d.h"
 
-void vector3DotProduct(vector3d_t a, vector3d_t b, float *d)
-{
-	*d = a[VEC3_X] * b[VEC3_X] + a[VEC3_Y] * b[VEC3_Y] + a[VEC3_Z] * b[VEC3_Z];  
-}
+#define QUAT_W		0
+#define QUAT_X		1
+#define QUAT_Y		2
+#define QUAT_Z		3
 
-void vector3CrossProduct(vector3d_t a, vector3d_t b, vector3d_t d) 
-{
-	d[VEC3_X] = a[VEC3_Y] * b[VEC3_Z] - a[VEC3_Z] * b[VEC3_Y];
-	d[VEC3_Y] = a[VEC3_Z] * b[VEC3_X] - a[VEC3_X] * b[VEC3_Z];
-	d[VEC3_Z] = a[VEC3_X] * b[VEC3_Y] - a[VEC3_Y] * b[VEC3_X];
-}
+typedef float quaternion_t[4]; 
 
+void quaternionNormalize(quaternion_t q);
+void quaternionToEuler(quaternion_t q, vector3d_t v);
+void eulerToQuaternion(vector3d_t v, quaternion_t q);
+void quaternionConjugate(quaternion_t s, quaternion_t d);
+void quaternionMultiply(quaternion_t qa, quaternion_t qb, quaternion_t qd);
+
+
+#endif /* MPUQUATERNION_H */
+
+
+/* Local Variables:  */
+/* mode: c           */
+/* c-basic-offset: 4 */
+/* End:              */

@@ -27,16 +27,16 @@ INCDIR = $(STAGEDIR)/include
 ### end cross-build defs ###
 
 # add -DI2C_DEBUG for debugging
-DEFS = -DEMPL_TARGET_LINUX -DMPU9150 -DAK8975_SECONDARY
+DEFS = -DEMPL_TARGET_LINUX -DMPU9250
 
 EMPLDIR = eMPL
 GLUEDIR = glue
-MPUDIR = mpu9150
+MPUDIR = mpu9250
 
 OBJS = inv_mpu.o \
        inv_mpu_dmp_motion_driver.o \
        linux_glue.o \
-       mpu9150.o \
+       mpu9250.o \
        quaternion.o \
        vector3d.o
 
@@ -57,8 +57,8 @@ imu.o : imu.c local_defaults.h
 imucal.o : imucal.c local_defaults.h
 	$(CC) $(CFLAGS) -I $(EMPLDIR) -I $(GLUEDIR) -I $(MPUDIR) $(DEFS) -c imucal.c
 
-mpu9150.o : $(MPUDIR)/mpu9150.c
-	$(CC) $(CFLAGS) $(DEFS) -I $(EMPLDIR) -I $(GLUEDIR) -c $(MPUDIR)/mpu9150.c
+mpu9250.o : $(MPUDIR)/mpu9250.c
+	$(CC) $(CFLAGS) $(DEFS) -I $(EMPLDIR) -I $(GLUEDIR) -c $(MPUDIR)/mpu9250.c
 
 quaternion.o : $(MPUDIR)/quaternion.c
 	$(CC) $(CFLAGS) $(DEFS) -c $(MPUDIR)/quaternion.c

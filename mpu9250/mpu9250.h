@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////
 //
-//  This file is part of linux-mpu9150
+//  This file is part of linux-mpu9250
 //
 //  Copyright (c) 2013 Pansenti, LLC
 //
@@ -21,8 +21,8 @@
 //  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
 //  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#ifndef MPU9150_H
-#define MPU9150_H
+#ifndef MPU9250_H
+#define MPU9250_H
 
 #include "quaternion.h"
 
@@ -65,14 +65,19 @@ typedef struct {
 } mpudata_t;
 
 
-void mpu9150_set_debug(int on);
-int mpu9150_init(int i2c_bus, int sample_rate, int yaw_mixing_factor);
-void mpu9150_exit();
-int mpu9150_read(mpudata_t *mpu);
-int mpu9150_read_dmp(mpudata_t *mpu);
-int mpu9150_read_mag(mpudata_t *mpu);
-void mpu9150_set_accel_cal(caldata_t *cal);
-void mpu9150_set_mag_cal(caldata_t *cal);
+void mpu9250_set_debug(int on);
+int mpu9250_init(int i2c_bus, int sample_rate, int yaw_mixing_factor);
+void mpu9250_exit();
+int mpu9250_read(mpudata_t *mpu);
+int mpu9250_read_dmp(mpudata_t *mpu);
+int mpu9250_read_mag(mpudata_t *mpu);
+void mpu9250_set_accel_cal(caldata_t *cal);
+void mpu9250_set_mag_cal(caldata_t *cal);
 
-#endif /* MPU9150_H */
+#endif /* MPU9250_H */
 
+
+/* Local Variables:  */
+/* mode: c           */
+/* c-basic-offset: 4 */
+/* End:              */

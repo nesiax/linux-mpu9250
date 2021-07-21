@@ -1,17 +1,17 @@
 # eMPL
 
-This is the Invensense Embedded MotionDriver v5.1 downloadable from the
+This is the Invensense Embedded MotionDriver v6.12 downloadable from the
 Invensense site.
 
 
 The code is taken from this directory of the extracted SDK
 
-        Embedded_MotionDriver_5.1/core/driver/eMPL
+        motion_driver-6.12/msp430/eMD-6.0/core/driver/eMPL
 
 
 The changes are minor to only 3 of the files as shown by the diff below
 
-        scott@hex:~/linux-mpu9150$ diff -cs eMPL-orig eMPL
+        scott@hex:~/linux-mpu9250$ diff -cs eMPL-orig eMPL
 
         Files eMPL-orig/dmpKey.h and eMPL/dmpKey.h are identical
 
