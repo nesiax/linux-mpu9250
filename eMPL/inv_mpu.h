@@ -39,7 +39,7 @@ struct int_param_s {
     void (*cb)(volatile void*);
     void *arg;
 #elif defined EMPL_TARGET_LINUX
-	unsigned int pin;
+        unsigned int pin;
 #endif
 };
 
@@ -131,4 +131,3 @@ int mpu_run_6500_self_test(long *gyro, long *accel, unsigned char debug);
 int mpu_register_tap_cb(void (*func)(unsigned char, unsigned char));
 
 #endif  /* #ifndef _INV_MPU_H_ */
-
